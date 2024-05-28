@@ -1,9 +1,11 @@
-package n_body
+package main
 
+import c "core"
+import r "rendering"
 import "core:fmt"
 
 main :: proc() {
     fmt.println("Starting N-body simulation...")
-    create_bodies(5)
-    simulate_bodies(1)
+    bodies := c.create_bodies(5)
+    r.raylib_render(bodies)
 }

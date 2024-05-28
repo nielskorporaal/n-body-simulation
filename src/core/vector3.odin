@@ -1,7 +1,7 @@
-package n_body;
+package core;
 
 Vector3 :: struct {
-    x,y,z: f64
+    x,y,z: f32
 }
 
 add :: proc(lhs: Vector3, rhs: Vector3) -> Vector3 {

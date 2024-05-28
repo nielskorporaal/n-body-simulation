@@ -1,4 +1,4 @@
-package n_body
+package core
 
 import "core:fmt"
 import "core:math"
@@ -12,7 +12,7 @@ create_bodies :: proc(num_bodies: int) -> []Body {
 			position     = Vector3{random(), random(), random()},
 			velocity     = Vector3{0, 0, 0},
 			acceleration = Vector3{0, 0, 0},
-			mass         = 5.0,
+			mass         = 2.0 * f32(i),
 		}
 		append(&bodies, body)
 	}
@@ -36,10 +36,8 @@ render_bodies :: proc() {
 	}
 }
 
-simulate_bodies :: proc(steps: int, dt: f64 = 25) {
+simulate_bodies :: proc(steps: int, dt: f32 = 25) {
 	for step in 1 ..= steps {
-		fmt.printf("Step %d:\n", step)
-
 		for i in 0 ..= len(bodies) - 1 {
 			// Calculate forces
 			bodies[i].acceleration = Vector3{dt, dt, dt}
@@ -63,11 +61,9 @@ simulate_bodies :: proc(steps: int, dt: f64 = 25) {
 				)
 			}
 		}
-
-		render_bodies()
 	}
 }
 
-random :: proc() -> f64 {
-	return (rand.float64() * 2.0 - 1.0) * 100.0
+random :: proc() -> f32 {
+	return abs((rand.float32() * 2.0 - 1.0) * 800.0)
 }
